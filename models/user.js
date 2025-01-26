@@ -2,27 +2,33 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
-    firstName: { type: String,
-         require: true
-        },
-    lastName: {
+    cnic: {
         type: String,
-        require: true,
+        required: true,
+        unique: true,
+    },
+    name: {
+        type: String,
+        required: true,
     },
     email: {
         type: String,
-        require: true,
+        required: true,
         unique: true,
     },
     password: {
         type: String,
-        require: true,
-        unique: true,
+        required: true,
     },
     image: {
         type: String,
-        default: null,
+        default: "",
     },
+    isVerified: {
+        type: Boolean,
+        default: false
+    },
+    myTeam:[{type:Schema.Types.ObjectId, ref: 'Team' }]
 });
 
 export const User = mongoose.model("User", userSchema);
